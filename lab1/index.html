@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lab1</title>
+    <style>
+        table,
+        tr,
+        td {
+            border: 1px solid black
+        }
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="width: 20%; margin: auto">
+
+    </div>
+    <header style="text-align: center">
+        <h1>Лабораторна Робота № 1</h1>
+        <h2>Судента групи кп-73</h2>
+        <h2>Гулька Данила Тарасовича</h2>
+        <p><bdi style="font-weight: bold">Мета роботи:</bdi> створити БД "Карткова колекційна гра" та сформувати
+            обмеження цілісності
+            на значення даних.</p>
+    </header>
+
+    <section>
+        <h4 style="text-align: center">Порядок виконання роботи</h4>
+        <ol>
+            <li>
+                Розробити концептуальну модель вибраного предметного середовища;
+            </li>
+            <li>
+                Розробити логічну модель (схему даних) БД;
+            </li>
+            <li>
+                Вивчити склад та правила роботи с СУБД PostgreSQL;
+            </li>
+            <li>
+                Створити в СУБД PostgreSQL БД "Карткова колекційна гра", використовуючи конструктори таблиць та
+                стовпчиків (схема БД "Карткова колекційна гра" наводиться нижче в Додаток Б до лабораторної роботи);
+            </li>
+            <li>
+                Сформувати обмеження цілісності;
+            </li>
+        </ol>
+    </section>
+
+    <section style="display:flex; flex-direction: column; justify-content: center; align-items: center">
+        <h4>Концептуальна модель</h4>
+        <img style="height: 500px; width: 500px" src="./DB_LAB1.png" />
+    </section>
+
+    <section>
+        <h4 style="text-align: center">Структура бд</h4>
+        <div class="gallery">
+            <p>Effect</p>
+            <img src="./struct_1.PNG" /> 
+            <p>player</p>
+            <img src="./struct_2.PNG" />
+            <p>Deck</p>
+            <img src="./struct_3.PNG" />
+            <p>Card</p>
+            <img src="./struct_4.PNG" />
+            <p>Connnection tables</p>
+            <img src="./struct_5.PNG" />
+            <img src="./struct_6.PNG" />
+            <img src="./struct_7.PNG" />
+        </div>
+    </section>
+
+    <section>
+        <h4 style="text-align: center">Опис структури бд</h4>
+        <table style="width: 100%">
+            <tr>
+                <th>name</th>
+                <th>property</th>
+                <th>type</th>
+            </tr>
+            <tr>
+                <td rowspan="3">Player</td>
+                <td>id</td>
+                <td>[PK]character (50)</td>
+            </tr>
+            <tr>
+                <td>login</td>
+                <td>character (100)</td>
+            </tr>
+            <tr>
+                <td>money</td>
+                <td>numeric</td>
+            </tr>
+
+            <tr>
+                <td rowspan="3">Deck</td>
+                <td>id</td>
+                <td>[PK]character (50)</td>
+            </tr>
+            <tr>
+                <td>title</td>
+                <td>character (100)</td>
+            </tr>
+            <tr>
+                <td>owner</td>
+                <td>character (50)</td>
+            </tr>
+
+            <tr>
+                <td rowspan="5">Effect</td>
+                <td>id</td>
+                <td>[PK]character (50)</td>
+            </tr>
+            <tr>
+                <td>aim</td>
+                <td>character (100)</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>character (20)</td>
+            </tr>
+            <tr>
+                <td>bonus</td>
+                <td>numeric</td>
+            </tr>
+            <tr>
+                <td>canBeActivated</td>
+                <td>boolean</td>
+            </tr>
+
+            <tr>
+                <td rowspan="9">Card</td>
+                <td>id</td>
+                <td>[PK]numeric</td>
+            </tr>
+            <tr>
+                <td>title</td>
+                <td>character (50)</td>
+            </tr>
+            <tr>
+                <td>desckription</td>
+                <td>character (200)</td>
+            </tr>
+            <tr>
+                <td>preview</td>
+                <td>character (100)</td>
+            </tr>
+            <tr>
+                <td>manacost</td>
+                <td>numeric</td>
+            </tr>
+            <tr>
+                <td>atk</td>
+                <td>numeric</td>
+            </tr>
+            <tr>
+                <td>def</td>
+                <td>numeric</td>
+            </tr>
+            <tr>
+                <td>isSpell</td>
+                <td>boolean</td>
+            </tr>
+            <tr>
+                <td>isArtefact</td>
+                <td>boolean</td>
+            </tr>
+        </table>
+
+    </section>
+
+</body>
+
+</html>
