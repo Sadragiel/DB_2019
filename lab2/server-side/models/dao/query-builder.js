@@ -1,12 +1,3 @@
-
-
-/*
-const insertString = `
-    insert into ${tablename} (login, money)
-    values ($1, $2)
-    RETURNING id
-`; */
-
 function creatNumericArray(n) {
     const ar = [];
     let i = 0;

@@ -4,9 +4,6 @@
 
 const builderModule = require('./query-builder');
 
-const getAllString = ``
-
-
 module.exports = (
     client,
     tablename,
