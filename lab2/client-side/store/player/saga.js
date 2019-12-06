@@ -9,7 +9,7 @@ function* requestAll() {
 
     console.log('players reseived: ', list);
 
-    yield put(actions.setList({ list }));
+    yield put(actions.setList(list));
 }
 
 function* watchRequestAll() {

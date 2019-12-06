@@ -12,7 +12,7 @@ export default storeName => (state = initialState, action) => {
         case storeTypes.SET_LIST: 
             return {
                 ...state,
-                list: action.payload.list
+                list: [...action.payload.list]
             };
         case storeTypes.SET_INSTANCE: 
             return {

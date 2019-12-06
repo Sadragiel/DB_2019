@@ -7,7 +7,7 @@ import playerSelectors from './selectors';
 
 import { combineReducers } from 'redux';
 
-const storeName = 'PLAYER';
+const storeName = 'player';
 
 const combinedReducer = combineReducers({
     data: commonStoreCreator.reducers(storeName),
