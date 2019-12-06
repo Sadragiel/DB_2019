@@ -15,7 +15,7 @@ if (!Number.isInteger(PORT)) {
 app.use('/static', express.static('public'));
 app.use(express.static(path.join(__dirname + '/../dist/')));
 
-app.use('/api/vi', api);
+app.use('/api/v1', api);
 
 app.use('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/../dist/index.html'));
@@ -27,6 +27,7 @@ app.use((err, req, res) => {
 });
 
 client.connect() 
+
 const server = app.listen(PORT, () => console.log('Server started at port:', PORT));
 
 //to close connections
