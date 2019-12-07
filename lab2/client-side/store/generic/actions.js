@@ -7,9 +7,9 @@ export default storeName => {
     return {
         requestList: createAction(storeTypes.REQUEST_LIST),
         requestInstance: createAction(storeTypes.REQUEST_INSTANCE),
-        requestUpdate: entyty => createAction(storeTypes.REQUEST_UPDATE)({entyty}),
-        requestCreate: entyty => createAction(storeTypes.REQUEST_CREATE)({entyty}),
-        requestDelete: id => createAction(storeTypes.REQUEST_CREATE)({id}),
+        requestUpdate: entity => createAction(storeTypes.REQUEST_UPDATE)({entity}),
+        requestCreate: entity => createAction(storeTypes.REQUEST_CREATE)({entity}),
+        requestDelete: id => createAction(storeTypes.REQUEST_DELETE)({id}),
         setList: list => createAction(storeTypes.SET_LIST)({list}),
         setInstance: instance => createAction(storeTypes.SET_INSTANCE)({instance})
     }

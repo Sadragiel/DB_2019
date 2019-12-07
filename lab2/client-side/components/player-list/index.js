@@ -6,12 +6,14 @@ import { actions, selectors } from './../../store/player';
 
 
 const mapDispathcToProps = dispatch => ({
-    getPlayers: () => dispatch(actions.requestList())
+    deletePlayer: id => dispatch(actions.requestDelete(id)),
+    getPlayers: () => dispatch(actions.requestList()),
+    getOnePlayer: id => dispatch(actions.requestInstance(id)),
 });
 
-
 const mapStateToProps = state => ({
-    playerList: selectors.getList(state)
+    playerList: selectors.getList(state), 
+    currentSelectedPlayerId: ( selectors.getInstance(state) || {} ).id, 
 })
 
 export default props => {

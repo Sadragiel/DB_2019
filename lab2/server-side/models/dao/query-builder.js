@@ -32,14 +32,14 @@ module.exports = ({
             name: `${tablename}-update`,
             text: `
                 update ${tablename}
-                ${fields.map((field, index) => 
-                    `set ${field}=$${index + 1}`)}
+                set ${fields.map((field, index) => 
+                    `${field}=$${index + 1}`).join(', ')}
                 where id=$${fields.length + 1}
             `,
             values: [...fields.map(field => entity[field]), entity.id]
         }),
         delete: id => ({
-            name: `${tablename}-update`,
+            name: `${tablename}-delete`,
             text: `
                 delete from ${tablename}
                 where id=$1

@@ -1,6 +1,11 @@
 const express = require('express');
 const path = require('path');
 const config = require('./config');   
+
+const logger = require('morgan');
+const bodyParser = require('body-parser');
+const busboyBodyParser = require('busboy-body-parser');
+
 const app = express();
 const PORT = parseInt(config.ServerPort);
 
@@ -11,6 +16,11 @@ if (!Number.isInteger(PORT)) {
     console.error('Bad port, please set PORT as anv variable');
     process.abort();
 }
+
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(busboyBodyParser({}));
 
 app.use('/static', express.static('public'));
 app.use(express.static(path.join(__dirname + '/../dist/')));

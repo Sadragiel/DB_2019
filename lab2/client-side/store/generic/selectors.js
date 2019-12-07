@@ -3,6 +3,6 @@ export default (storeName) => {
 
     return {
         getList: state => getStore(state).list,
-        getInstance: state => getStore(state).instance
+        getInstance: state => getStore(state).instance,
     };
 }

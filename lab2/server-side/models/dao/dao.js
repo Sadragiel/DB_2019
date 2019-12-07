@@ -20,19 +20,19 @@ module.exports = (
                 .catch(console.log),
         get: id => 
             client.query(builder.queries.get(id))
-                .then(res => res.rows)
+                .then(res => res.rows[0])
                 .catch(console.log),
-        insert: entity => 
+        insert: entity =>
             client.query(builder.queries.insert(entity))
-                .then(res => console.log(res.rows) || res.rows[0].id)
+                .then(res => res.rows[0].id)
                 .catch(console.log),
         update: entity => 
             client.query(builder.queries.update(entity))
-                .then(res => console.log(res.rows) || res.rows[0].id)
+                .then(() => entity.id)
                 .catch(console.log),
         delete: id => 
             client.query(builder.queries.delete(id))
-                .then(res => res.rowCount)
+                .then(res => !!res.rowCount)
                 .catch(console.log)
     }
 };
