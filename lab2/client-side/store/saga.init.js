@@ -4,10 +4,12 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import reducer from './reducers';
 
 import playerSaga from './player/saga';
+import deckSaga from './deck/saga';
 
 function* rootSaga() {
   yield all([
-    ...playerSaga
+    ...playerSaga,
+    ...deckSaga,
   ]);
 }
 

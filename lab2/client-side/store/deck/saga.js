@@ -1,16 +1,19 @@
 import { put, takeEvery, takeLatest, select } from 'redux-saga/effects'
 import { actions, selectors, types } from './';
 
-import { actions as deckActions} from './../deck';
+import {selectors as playerSelectors} from './../player'
 
 import httpClient from './../../utils/httpClient';
 
-
-
-const urlString = (id = '') => `api/v1/player/${id}`;
+const urlString = (id = '') => `api/v1/deck/${id}`;
 
 function* requestAll() {
+    const currentPlayer = yield select(playerSelectors.getInstance);
+    if(!currentPlayer.id)
+        return;
+
     const url = new URL(urlString(), window.origin);
+    url.searchParams.set('owner', currentPlayer.id);
     const list = yield httpClient.get(url.toString());
 
     yield put(actions.setList(list));
@@ -26,15 +29,13 @@ function* requestOne({ payload }) {
     const instance = yield httpClient.get(url.toString());
 
     yield put(actions.setInstance(instance));
-
-    yield put(deckActions.requestList());
 }
 
 function* watchRequestOne() {
     yield takeLatest(types.REQUEST_INSTANCE, requestOne);
 }   
 
-function* updatePlayer({payload}) {
+function* update({payload}) {
     const url = new URL(urlString(), window.origin);
     const updatedInstance = yield httpClient.put(url.toString(), payload);
 
@@ -43,10 +44,16 @@ function* updatePlayer({payload}) {
 }
 
 function* watchUpdate() {
-    yield takeLatest(types.REQUEST_UPDATE, updatePlayer);
+    yield takeLatest(types.REQUEST_UPDATE, update);
 }
 
-function* createPlayer({ payload }) {
+function* create({ payload }) {
+    const currentPlayer = yield select(playerSelectors.getInstance);
+    if(!currentPlayer.id)
+        return;
+
+    payload.entity.owner = currentPlayer.id;
+    payload.entity.rotate = true;
     const url = new URL(urlString(), window.origin);
     const createdInstance = yield httpClient.post(url.toString(), payload);
 
@@ -55,22 +62,22 @@ function* createPlayer({ payload }) {
 }
 
 function* watchCreate() {
-    yield takeLatest(types.REQUEST_CREATE, createPlayer);
+    yield takeLatest(types.REQUEST_CREATE, create);
 }
 
-function* deletePlayer({payload : { id }}) {
+function* deleteInstance({payload : { id }}) {
     const url = new URL(urlString(id), window.origin);
     yield httpClient.delete(url.toString());
 
     yield requestAll();
-    const currentPlayer = yield select(selectors.getInstance);
-    if(currentPlayer.id === id) {
+    const currentDeck = yield select(selectors.getInstance);
+    if(currentDeck.id === id) {
         yield put(actions.setInstance({}));
     }
 }
 
 function* watchDelete() {
-    yield takeLatest(types.REQUEST_DELETE, deletePlayer);
+    yield takeLatest(types.REQUEST_DELETE, deleteInstance);
 }
 
 export default [

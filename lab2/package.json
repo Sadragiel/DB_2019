@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "npm-run-all --parallel start:server watch:client",
-    "start:server": "nodemon ./server-side/index.js",
-    "watch:client": "webpack --watch --mode development"
+    "start:server": "npm run clear:client-build & nodemon ./server-side/index.js",
+    "watch:client": "webpack --watch --mode development",
+    "clear:client-build": "rmdir ./dist"
   },
   "author": "",
   "license": "ISC",

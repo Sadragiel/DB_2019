@@ -7,10 +7,6 @@ const fields = [
 ];
 
 module.exports =(tablename, linkFrom, linkTo) =>   client => ({
-    ...dao(client, tablename, fields),
-    player: function(login, money) {
-        this.login = login;
-        this.money = money;
-    }
+    ...dao(client, tablename, [linkFrom.field, linkTo.field])
 })
 
