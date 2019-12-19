@@ -5,11 +5,13 @@ import reducer from './reducers';
 
 import playerSaga from './player/saga';
 import deckSaga from './deck/saga';
+import cardSaga from './card/saga';
 
 function* rootSaga() {
   yield all([
     ...playerSaga,
     ...deckSaga,
+    ...cardSaga,
   ]);
 }
 

@@ -5,7 +5,9 @@ const client = require('./../connection');
 
 const player = require('./../models/player')(client);
 
-const sendData =res => data => res.json(data);
+const link = require('./../models/links/player-card')(client);
+
+const sendData = res => data => res.json(data);
 
 router.get('/', (req, res) => {
     player.getAll()
@@ -16,6 +18,8 @@ router.get('/:id', (req, res) => {
     player.get(req.params.id)
         .then(sendData(res));
 });
+
+
 
 router.post('/', (req, res) => {
     const { entity: { login, money }} = req.body;

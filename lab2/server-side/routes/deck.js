@@ -4,7 +4,6 @@ const router = express.Router();
 const client = require('./../connection');
 
 const deck = require('./../models/deck')(client);
-const link = require('./../models/links/player-deck')(client);
 
 const sendData =res => data => res.json(data);
 
