@@ -13,7 +13,7 @@ const mapDispathcToProps = dispatch => ({
 const mapStateToProps = state => ({
     player: selectors.getInstance(state),
 });
-1
+
 export default props => {
     const ConnectedPlayerForm = connect(
         mapStateToProps,
@@ -22,4 +22,5 @@ export default props => {
     return (
         <ConnectedPlayerForm {...props} />
     );
+    
 }

@@ -2,10 +2,10 @@ const dao = require('./dao/dao');
 
 const tablename = 'public."Effect"';
 const fields = [
-    'aim',
-    'bonus',
-    'type',
-    'activatable'
+    'aim',          //string
+    'bonus',        //int
+    'type',         //string
+    'activatable'   //bool
 ];
 
 module.exports = client => ({

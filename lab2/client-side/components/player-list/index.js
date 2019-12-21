@@ -9,6 +9,7 @@ const mapDispathcToProps = dispatch => ({
     deletePlayer: id => dispatch(actions.requestDelete(id)),
     getPlayers: () => dispatch(actions.requestList()),
     getOnePlayer: id => dispatch(actions.requestInstance(id)),
+    search: (from, to) => dispatch(actions.parametrizedSearch(from, to)),
 });
 
 const mapStateToProps = state => ({

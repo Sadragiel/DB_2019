@@ -14,6 +14,12 @@ router.get('/', (req, res) => {
         .then(sendData(res));
 });
 
+router.get('/search', (req, res) => {
+    console.log('search', req.query.maney_from, req.query.maney_to)
+    player.parametrizedSearch(req.query.maney_from, req.query.maney_to)
+        .then(sendData(res));
+});
+
 router.get('/:id', (req, res) => {
     player.get(req.params.id)
         .then(sendData(res));

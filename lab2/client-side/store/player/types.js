@@ -1,5 +1,5 @@
 import commonTypesCreator from './../generic/types';
 
-export default {
-    //todo some extra stypes
-};
+export default (storeName) => ({
+    PARAMETRIZED_SEARCH: `${storeName}.PARAMETRIZED_SEARCH`,
+})

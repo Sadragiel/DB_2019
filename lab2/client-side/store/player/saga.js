@@ -1,4 +1,4 @@
-import { put, takeEvery, takeLatest, select } from 'redux-saga/effects'
+import { put, takeEvery, takeLatest, select, delay } from 'redux-saga/effects'
 import { actions, selectors, types } from './';
 
 import { actions as deckActions} from './../deck';
@@ -73,10 +73,26 @@ function* watchDelete() {
     yield takeLatest(types.REQUEST_DELETE, deletePlayer);
 }
 
+function* search({payload: {from, to}}) {
+    yield delay(500);
+    const url = new URL(urlString('search'), window.origin);
+    url.searchParams.set('maney_from', from);
+    url.searchParams.set('maney_to', to);
+
+    const list = yield httpClient.get(url.toString());
+
+    yield put(actions.setList(list));
+}
+
+function* wathcSearch() {
+    yield takeLatest(types.PARAMETRIZED_SEARCH, search);
+}
+
 export default [
     watchRequestAll(),
     watchRequestOne(),
     watchUpdate(),
     watchCreate(),
     watchDelete(),
+    wathcSearch(),
 ];

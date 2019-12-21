@@ -2,13 +2,13 @@ const dao = require('./dao/dao');
 
 const tablename = 'public."Card"';
 const fields = [
-    'title',
-    'description',
-    'manacost',
-    'atk',
-    'def',
-    'artefact',
-    'spell'
+    'title',        //string
+    'description',  //string
+    'manacost',     //int
+    'atk',          //int
+    'def',          //int
+    'artefact',     //bool
+    'spell'         //bool
 ];
 
 module.exports = client => ({
@@ -60,4 +60,6 @@ module.exports = client => ({
         })
         .then(res => res.rows || [])
         .catch(console.log),
+
+
 })

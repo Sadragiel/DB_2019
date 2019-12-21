@@ -15,12 +15,12 @@ const combinedReducer = combineReducers({
 });
 
 export const actions = {
-    ...playerActions,
+    ...playerActions(storeName),
     ...commonStoreCreator.actions(storeName)
 };
 
 export const types = {
-    ...playerTypes,
+    ...playerTypes(storeName),
     ...commonStoreCreator.types(storeName)
 };
 

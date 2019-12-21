@@ -50,7 +50,6 @@ function* create({ payload }) {
     const currentPlayer = yield select(playerSelectors.getInstance);
     if(!currentPlayer.id)
         return;
-        console.log('pay', payload)
     const url = new URL(urlString('player'), window.origin);
     const createdInstance = yield httpClient.post(url.toString(), {
         cardLink: {
@@ -67,11 +66,7 @@ function* watchCreate() {
 }
 
 function* search({ payload: searchString }) {
-    console.log('1', searchString)
-    
     yield delay(500);
-    console.log('2')
-
     if(!searchString)
         return;
     const url = new URL(urlString('search'), window.origin);

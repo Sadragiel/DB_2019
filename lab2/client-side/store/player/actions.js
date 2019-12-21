@@ -1,5 +1,10 @@
 import types from './types';
+import { createAction } from 'redux-actions';
 
-export default {
-    //Todo some extra action
-};
+export default storeName => {
+    const storeTypes = types(storeName);
+
+    return {
+        parametrizedSearch: (from, to) => createAction(storeTypes.PARAMETRIZED_SEARCH)({from, to}),
+    }
+}
