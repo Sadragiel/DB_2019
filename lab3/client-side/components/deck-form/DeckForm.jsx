@@ -7,6 +7,7 @@ export default ({createDeck, updateDeck, deck, canBeEdited}) => {
         enableReinitialize: true,
         initialValues: {
             title: deck.title,
+            cost: deck.cost,
         },
         onSubmit: values => deck.id 
         ? updateDeck({...deck, ...values})
@@ -25,6 +26,15 @@ export default ({createDeck, updateDeck, deck, canBeEdited}) => {
                 type="text"
                 onChange={formik.handleChange}
                 value={formik.values.title}
+            />
+            <br />
+            <label htmlFor="cost">Cost</label>
+            <input 
+                id="cost"
+                name="cost"
+                type="number"
+                onChange={formik.handleChange}
+                value={formik.values.cost}
             />
             <button type="submit">{deck.id ? 'Update Deck' : 'Create Deck'}</button>
         </form>

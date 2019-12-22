@@ -4,11 +4,20 @@ module.exports = sequelize => {
     sequelize.query(`
         CREATE OR REPLACE FUNCTION clear_decks()
             RETURNS trigger AS $$
+        DECLARE 
+            rec RECORD;
         BEGIN
-            IF NEW.money < OLD.money 
-                OR NEW.money > 10000
-                THEN
-                DELETE FROM "Deck" WHERE "Deck".owner=OLD.id;
+            IF NEW.money < 0 THEN
+                RAISE 'Money cannot be less than 0'; 
+            END IF;
+            IF NEW.money < OLD.money OR NEW.money > 10000
+            THEN
+                FOR rec IN SELECT id,cost FROM "Deck" WHERE "Deck".owner=OLD.id
+                LOOP
+                    IF rec.cost % 2 = 0 THEN
+                        DELETE FROM "Deck" WHERE "Deck".id=rec.id;
+                    END IF;
+                END LOOP;
             END IF;
             RETURN NEW;
         END;

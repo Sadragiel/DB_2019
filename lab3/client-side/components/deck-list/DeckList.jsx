@@ -18,8 +18,8 @@ export default ({
                     key={deck.id} 
                     onClick={() => !isCurrentSelectedDeck(deck.id)  && getOneDeck(deck.id)}> 
                    
-                    <p>{deck.title}</p>
-                    <p>{deck.rotate ? 'Rotate' : 'Unlimited'}</p>
+                    <p>{deck.title} (cost {deck.cost})</p>
+                    <p>({deck.rotate ? 'Rotate' : 'Unlimited'})</p>
                     <button onClick={(e) => e.preventDefault() || deleteDeck(deck.id)}>DELETE</button>
                 </li> 
             ))

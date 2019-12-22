@@ -7,6 +7,9 @@ const fields = {
     owner: {
         type: Sequelize.NUMBER,
     },
+    cost: {
+        type: Sequelize.NUMBER,
+    },
     rotate: {
         type: Sequelize.BOOLEAN,
     },
