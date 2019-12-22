@@ -33,34 +33,11 @@ router.get('/:id', (req, res) => {
         .then(sendData(res));
 });
 
-// router.post('/', (req, res) => {
-//     const { entity} = req.body;
-//     console.log('post', entity)
-
-//     deck.insert(entity) 
-//         .then(id => deck.get(id))
-//         .then(sendData(res));
-// });
-
 router.post('/player', (req, res) => {
     const { cardLink } = req.body;
     link.insert(cardLink)
         .then(sendData(res));
 })
-
-// router.post('/deck', (req, res) => {
-//     const { cardLink } = req.body;
-//     link.insert(cardLink)
-//         .then(sendData(res));
-// })
-
-// router.put('/', (req, res) => {
-//     const { entity } = req.body;
-
-//     deck.update(entity) 
-//         .then(id => deck.get(id))
-//         .then(sendData(res));
-// });
 
 router.delete('/:owner', (req, res) => {
     link.deleteByOwner(req.params.owner) 
