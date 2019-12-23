@@ -9,6 +9,7 @@ module.exports = sequelize => {
         BEGIN
             IF NEW.money < 0 THEN
                 RAISE 'Money cannot be less than 0'; 
+                RETURN OLD;
             END IF;
             IF NEW.money < OLD.money OR NEW.money > 10000
             THEN

@@ -10,6 +10,7 @@ module.exports = {
         this.def = def;
         this.artefact = artefact;
         this.spell = spell;
+        this.creationDate = Date.now();
     },
     ...crud(CardModel),
     getByOwner: (owner) =>

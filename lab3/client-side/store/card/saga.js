@@ -11,7 +11,7 @@ function* requestAll() {
     const url = new URL(urlString(), window.origin);
     const list = yield httpClient.get(url.toString());
 
-    yield put(actions.setList(list));
+    yield put(actions.setList(list.slice(0, 100)));
 }
 
 function* watchRequestAll() {

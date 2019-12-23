@@ -22,6 +22,9 @@ const fields = {
     spell: {
         type: Sequelize.BOOLEAN,
     },
+    creationDate: {
+        type: Sequelize.DATE
+    }
 }
 
 module.exports = sequelize => {

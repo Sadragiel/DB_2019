@@ -5,6 +5,9 @@ const link = require('./../models/links/player-card');
 
 const sendData = res => data => res.json(data);
 
+const randomStr = () => Math.random().toString(36).substring(7);
+const randomNumber = (enchancer = 1) => Math.floor(Math.random() * enchancer);
+
 router.get('/', (req, res) => {
     console.log('req.query.owner', req.query.owner)
     if(req.query.owner) {
@@ -18,16 +21,27 @@ router.get('/', (req, res) => {
     }
 });
 
-
-router.get('/search', (req, res) => {
-    card.fullTextSearch(req.query.search)
-        .then(sendData(res));
-});
-
 router.get('/:id', (req, res) => {
     card.get(req.params.id)
         .then(sendData(res));
 });
+
+router.post('/random', async (req, res) => {
+    const type = ['follower', 'art', 'spell'][randomNumber(2)];
+    for(let i = 0; i < req.query.count; i++) {
+        const cardInstance = new card.card(
+            `CardTitle_${randomStr()}`,
+            `CardDescription_${randomStr()}`,
+            randomNumber(20),
+            randomNumber(20),
+            randomNumber(20),
+            type === 'art',
+            type === 'spell',
+        );
+        await card.insert(cardInstance);
+    } 
+    res.sendStatus(200);
+})
 
 router.post('/player', (req, res) => {
     const { cardLink } = req.body;
