@@ -21,14 +21,11 @@ router.get('/', (req, res) => {
     }
 });
 
-router.get('/:id', (req, res) => {
-    card.get(req.params.id)
-        .then(sendData(res));
-});
-
-router.post('/random', async (req, res) => {
-    const type = ['follower', 'art', 'spell'][randomNumber(2)];
-    for(let i = 0; i < req.query.count; i++) {
+function recursiveRandomCreation(counter) {
+    if(counter < 0)
+        return;
+    setTimeout(async () => {
+        const type = ['follower', 'art', 'spell'][randomNumber(2)];
         const cardInstance = new card.card(
             `CardTitle_${randomStr()}`,
             `CardDescription_${randomStr()}`,
@@ -39,7 +36,17 @@ router.post('/random', async (req, res) => {
             type === 'spell',
         );
         await card.insert(cardInstance);
-    } 
+        recursiveRandomCreation(counter - 1);
+    }, 5);
+}
+
+router.get('/:id', (req, res) => {
+    card.get(req.params.id)
+        .then(sendData(res));
+});
+
+router.post('/random', async (req, res) => {
+    recursiveRandomCreation(req.query.count);
     res.sendStatus(200);
 })
 
